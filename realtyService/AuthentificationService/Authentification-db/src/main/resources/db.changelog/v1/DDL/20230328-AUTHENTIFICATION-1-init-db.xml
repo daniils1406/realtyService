@@ -1,0 +1,42 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <property name="uuid_function" value="uuid_generate_v4()" dbms="postgresql"/>
+
+
+    <changeSet id="001" author="daniil stepkin">
+        <sql>CREATE EXTENSION "uuid-ossp";</sql>
+        <sql>CREATE TYPE userType AS ENUM ('ORGANISATION','AGENT','CLIENT')</sql>
+        <sql> CREATE TYPE role AS ENUM ('CLIENT','OWNER','ADMIN','AGENT','BUILDER','AGENCY')</sql>
+        <sql> CREATE TYPE status AS ENUM ('REGISTERED','VERIFIED','DELETE','BANNED')</sql>
+        <sql> CREATE TYPE agentLevel AS ENUM ('STARTING','VERIFIED','EXPERIENCED','PRO')</sql>
+        <createTable tableName="cian_user">
+            <column name="id" type="uuid" defaultValueComputed="${uuid_function}">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user"/>
+            </column>
+            <column name="create_date" type="DATE"/>
+            <column name="update_date" type="DATE"/>
+            <column name="first_name" type="VARCHAR"/>
+            <column name="Last_name" type="VARCHAR"/>
+            <column name="patronymic" type="VARCHAR"/>
+            <column name="logo" type="VARCHAR"/>
+            <column name="phone" type="VARCHAR"/>
+            <column name="login" type="VARCHAR"/>
+            <column name="password" type="VARCHAR"/>
+            <column name="role" type="role"/>
+            <column name="status" type="status"/>
+            <column name="user_type" type="userType"/>
+        </createTable>
+
+        <createTable tableName="agent">
+            <column name="agencyId" type="uuid"/>
+            <column name="experience" type="agentLevel"/>
+        </createTable>
+
+        <createTable tableName="organisation">
+            <column name="organisationId" type="uuid"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

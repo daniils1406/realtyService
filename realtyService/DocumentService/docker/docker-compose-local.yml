@@ -1,0 +1,67 @@
+version: '3'
+services:
+  minio:
+    image: minio/minio
+    hostname: "minio"
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+      MINIO_ACCESS_KEY: admin
+      MINIO_SECRET_KEY: 12345678
+    volumes:
+      - ./data:/data
+      - ./config:/root/.minio/
+    command: server --console-address ':9001' /data
+    privileged: true
+    restart: always
+    networks:
+      - spring-cloud-network
+
+
+
+
+  document-service:
+    image: document
+    container_name: document-service
+    depends_on:
+      - minio
+      - Document-db
+    links:
+      - minio
+      - Document-db
+    expose:
+      - 8081
+    ports:
+      - "8081:8081"
+    environment:
+      RABBIT_HOST: rabbitmq
+      RABBIT_PORT: 5672
+      RABBIT_USERNAME: guest
+      RABBIT_PASSWORD: guest
+      DB_HOST: Document-db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: Landrover2013
+      MINIO_HOST: minio
+      MINIO_PORT: 9000
+      CONSUL_HOST: consul
+    networks:
+      - spring-cloud-network
+
+  Document-db:
+    container_name: Document-db
+    image: postgres:12-alpine
+    restart: on-failure
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Landrover2013
+      POSTGRES_DB: DocumentService
+    networks:
+      - spring-cloud-network
+
+networks:
+  spring-cloud-network:
+    driver: bridge

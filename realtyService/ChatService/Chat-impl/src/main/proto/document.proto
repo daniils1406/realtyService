@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package documentPackage;
+option java_multiple_files = true;
+option java_outer_classname = "Document";
+option java_package = "document";
+
+
+message CheckRequest{
+  string id=1;
+}
+
+enum EntityType{
+  BUILDER=0;
+  AGENCY=1;
+  AGENT=2;
+  OWNER=3;
+  USER=4;
+  RESIDENTIAL_COMPLEX=5;
+  FLAT=6;
+  HOUSE=7;
+}
+
+message NewEntityType{
+  string id=1;
+  EntityType type=2;
+}
+
+message CheckResponse{
+  bool isVerify=1;
+}
+
+message Empty{
+
+}
+
+service FileService{
+  rpc checkForTheNecessaryFiles(CheckRequest) returns (CheckResponse);
+
+  rpc setNewTypeOfEntity(NewEntityType) returns (Empty);
+}

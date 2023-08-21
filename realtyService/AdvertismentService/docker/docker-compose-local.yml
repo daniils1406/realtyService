@@ -1,0 +1,43 @@
+version: '3'
+services:
+  advertisment-service:
+    image: advertisment
+    container_name: advertisment-service
+    depends_on:
+      - advertisement-db
+    links:
+      - advertisement-db
+    ports:
+      - "8082:8082"
+    environment:
+      RABBIT_HOST: rabbitmq
+      RABBIT_PORT: 5672
+      RABBIT_USERNAME: guest
+      RABBIT_PASSWORD: guest
+      DB_HOST: advertisement-db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: Landrover2013
+      CONSUL_HOST: consul
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    networks:
+      - spring-cloud-network
+
+  advertisement-db:
+    image: postgres:12-alpine
+    container_name: advertisement-db
+    restart: on-failure
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Landrover2013
+      POSTGRES_DB: AdvertismentService
+    networks:
+      - spring-cloud-network
+
+
+networks:
+  spring-cloud-network:
+    driver: bridge

@@ -1,0 +1,5 @@
+rootProject.name = 'DocumentService'
+include 'Document-api'
+include 'Document-db'
+include 'Document-impl'
+

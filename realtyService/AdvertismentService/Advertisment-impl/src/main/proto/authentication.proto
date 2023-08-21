@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package authenticationPackage;
+option java_multiple_files = true;
+option java_outer_classname = "Authentication";
+option java_package = "authentication";
+
+
+message IdRequest{
+  string id=1;
+}
+
+enum Role{
+  CLIENT=0;
+  OWNER=1;
+  ADMIN=2;
+  AGENT=3;
+  BUILDER=4;
+  AGENCY=5;
+}
+
+message Empty{
+
+}
+
+message CheckIdIsNotificationRoom{
+  bool isNotificationRoom=1;
+}
+
+message CianUserResponse{
+  string id=1;
+  string firstName=2;
+  string lastName=3;
+  string patronymic=4;
+  string phone=5;
+  string login=6;
+  Role role=7;
+}
+
+message CompanyIdPersonBelongsTo{
+  string id=1;
+}
+
+service CianUserService{
+  rpc findById(IdRequest) returns (CianUserResponse);
+
+  rpc bannedById(IdRequest) returns (Empty);
+
+  rpc verifiedById(IdRequest) returns (Empty);
+
+  rpc findCompanyWhichPersonBelong(IdRequest) returns (CompanyIdPersonBelongsTo);
+
+  rpc changeClientToOwner(IdRequest) returns (Empty);
+}

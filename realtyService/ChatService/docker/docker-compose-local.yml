@@ -1,0 +1,79 @@
+version: '3'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.2
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - spring-cloud-network
+
+  kafka:
+    image: confluentinc/cp-kafka:7.3.2
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    networks:
+      - spring-cloud-network
+
+  chat-service:
+    image: chat
+    container_name: chat-service
+    depends_on:
+      - kafka
+      - Chat-db
+    links:
+      - kafka
+      - Chat-db
+    expose:
+      - 8084
+    ports:
+      - "8084:8084"
+    environment:
+      RABBIT_HOST: rabbitmq
+      RABBIT_PORT: 5672
+      RABBIT_USERNAME: guest
+      RABBIT_PASSWORD: guest
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+      DB_HOST: Chat-db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: Landrover2013
+      MINIO_HOST: minio
+      MINIO_PORT: 9000
+      CONSUL_HOST: consul
+    networks:
+      - spring-cloud-network
+
+  Chat-db:
+    container_name: Chat-db
+    image: postgres:12-alpine
+    restart: on-failure
+    ports:
+      - "5436:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Landrover2013
+      POSTGRES_DB: ChatService
+    networks:
+      - spring-cloud-network
+
+
+networks:
+  spring-cloud-network:
+    driver: bridge

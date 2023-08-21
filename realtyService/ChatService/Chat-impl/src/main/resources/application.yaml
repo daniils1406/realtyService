@@ -1,0 +1,55 @@
+spring:
+  rabbitmq:
+    host: ${RABBIT_HOST:localhost}
+    port: ${RABBIT_PORT:5672}
+    username: ${RABBIT_USERNAME:guest}
+    password: ${RABBIT_PASSWORD:guest}
+  kafka:
+    server: ${KAFKA_HOST:localhost}:${KAFKA_PORT:9092}
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/ChatService
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:Landrover2013}
+
+  liquibase:
+    change-log: classpath:db.changelog/changelog-master.xml
+  data:
+    rest:
+      default-page-size: 5
+
+#  application:
+#    name: chatService
+#  cloud:
+#    consul:
+#      config:
+#        enabled: false
+#      host: ${CONSUL_HOST:127.0.0.1}
+#      discovery:
+#        instanceId: "${spring.application.name}-${server.port}-${spring.cloud.client.ip-address}" #все эти атрибуты должны присутствовать в пропертях правильно? То есть без них приложение выдаст ошибку при запуске
+#        prefer-ip-address: true
+#        health-check-critical-timeout: "1m"
+
+
+
+management:
+  health:
+    redis:
+      enabled: false
+
+
+service-rabbit:
+  exchangeNotification-name: exchangeNotification
+  queueNotification-name: queueNotification
+  routingNotification-key: keyNotification
+
+#server:
+#  port: 8084
+#grpc:
+#  server:
+#    port: 8094
+
+
+rsa:
+  public-key: "classpath:certs/public_key.pem"

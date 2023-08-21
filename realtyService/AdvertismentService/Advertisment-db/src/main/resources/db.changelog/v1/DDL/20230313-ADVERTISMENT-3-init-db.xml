@@ -1,0 +1,207 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <property name="uuid_function" value="uuid_generate_v4()" dbms="postgresql"/>
+
+    <changeSet id="003" author="daniil stepkin">
+        <createTable tableName="regions">
+            <column name="code" type="int">
+                <constraints unique="true"/>
+            </column>
+            <column name="region_name" type="varchar"/>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="004" author="daniil stepkin">
+        <createTable tableName="regions_and_agency">
+            <column name="agency_id" type="uuid">
+                <constraints foreignKeyName="fk_to_agency" references="agency(id)" unique="false"/>
+            </column>
+            <column name="region_code" type="int">
+                <constraints foreignKeyName="fk_to_region" references="regions(code)" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="005" author="daniil stepkin">
+        <insert tableName="regions">
+            <column name="code" type="int" value="01"/>
+            <column name="region_name" type="varchar" value="Республика Адыгея"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="02"/>
+            <column name="region_name" type="varchar" value="Республика Башкортостан"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="04"/>
+            <column name="region_name" type="varchar" value="Республика Алтай (Горный Алтай)"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="06"/>
+            <column name="region_name" type="varchar" value="Республика Ингушетия"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="08"/>
+            <column name="region_name" type="varchar" value="Республика Калмыкия"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="10"/>
+            <column name="region_name" type="varchar" value="Республика Карелия"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="12"/>
+            <column name="region_name" type="varchar" value="Республика Марий Эл"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="14"/>
+            <column name="region_name" type="varchar" value="Республика Саха (Якутия)"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="16"/>
+            <column name="region_name" type="varchar" value="Республика Татарстан"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="18"/>
+            <column name="region_name" type="varchar" value="Удмуртская Республика"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="21"/>
+            <column name="region_name" type="varchar" value="Чувашская Республика"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="23"/>
+            <column name="region_name" type="varchar" value="Краснодарский край"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="25"/>
+            <column name="region_name" type="varchar" value="Приморский край"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="27"/>
+            <column name="region_name" type="varchar" value="Хабаровский край"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="29"/>
+            <column name="region_name" type="varchar" value="Архангельская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="31"/>
+            <column name="region_name" type="varchar" value="Белгородская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="33"/>
+            <column name="region_name" type="varchar" value="Владимирская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="35"/>
+            <column name="region_name" type="varchar" value="Вологодская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="37"/>
+            <column name="region_name" type="varchar" value="Ивановская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="39"/>
+            <column name="region_name" type="varchar" value="Калининградская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="41"/>
+            <column name="region_name" type="varchar" value="Камчатский край"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="43"/>
+            <column name="region_name" type="varchar" value="Кировская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="45"/>
+            <column name="region_name" type="varchar" value="Курганская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="47"/>
+            <column name="region_name" type="varchar" value="Ленинградская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="49"/>
+            <column name="region_name" type="varchar" value="Магаданская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="51"/>
+            <column name="region_name" type="varchar" value="Мурманская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="53"/>
+            <column name="region_name" type="varchar" value="Новгородская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="55"/>
+            <column name="region_name" type="varchar" value="Омская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="57"/>
+            <column name="region_name" type="varchar" value="Орловская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="59"/>
+            <column name="region_name" type="varchar" value="Пермский край"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="61"/>
+            <column name="region_name" type="varchar" value="Ростовская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="63"/>
+            <column name="region_name" type="varchar" value="Самарская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="65"/>
+            <column name="region_name" type="varchar" value="Сахалинская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="67"/>
+            <column name="region_name" type="varchar" value="Смоленская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="69"/>
+            <column name="region_name" type="varchar" value="Тверская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="71"/>
+            <column name="region_name" type="varchar" value="Тульская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="73"/>
+            <column name="region_name" type="varchar" value="Ульяновская область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="75"/>
+            <column name="region_name" type="varchar" value="Забайкальский край"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="77"/>
+            <column name="region_name" type="varchar" value="Москва"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="79"/>
+            <column name="region_name" type="varchar" value="Еврейская автономная область"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="83"/>
+            <column name="region_name" type="varchar" value="Ненецкий автономный округ"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="87"/>
+            <column name="region_name" type="varchar" value="Чукотский автономный округ"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="92"/>
+            <column name="region_name" type="varchar" value="г. Севастополь"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="95"/>
+            <column name="region_name" type="varchar" value="Чеченская республика"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

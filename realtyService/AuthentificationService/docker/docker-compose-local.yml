@@ -1,0 +1,90 @@
+version: '3.8'
+
+services:
+
+  rabbitmq:
+    image: rabbitmq:3.9.5-management
+    container_name: rabbitmq
+    restart: on-failure
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - spring-cloud-network
+
+
+
+  authentification-service:
+    image: authentifications
+    container_name: authentification-service
+    depends_on:
+      - rabbitmq
+      - Authentification-db
+    links:
+      - rabbitmq
+      - Authentification-db
+    expose:
+      - 8080
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: Authentification-db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: Landrover2013
+      RABBIT_HOST: rabbitmq
+      RABBIT_PORT: 5672
+      RABBIT_USERNAME: guest
+      RABBIT_PASSWORD: guest
+      CONSUL_HOST: consul
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    networks:
+      - spring-cloud-network
+
+
+  Authentification-db:
+    container_name: Authentification-db
+    image: postgres:12-alpine
+    restart: on-failure
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Landrover2013
+      POSTGRES_DB: AuthentificationService
+    networks:
+      - spring-cloud-network
+
+
+
+
+  redis:
+    image: redis
+    container_name: redis
+    restart: always
+    command: redis-server
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./storage/redis/data:/data
+    logging:
+      driver: none
+    networks:
+      - spring-cloud-network
+
+  consul:
+    image: consul:1.1.0
+    hostname: localhost
+    ports:
+      - 8500:8500
+    networks:
+      - spring-cloud-network
+    network_mode: bridge
+
+
+
+
+networks:
+  spring-cloud-network:
+    driver: bridge

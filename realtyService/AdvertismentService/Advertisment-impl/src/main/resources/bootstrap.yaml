@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: advertisementService
+  cloud:
+    consul:
+      config:
+        enabled: true
+      host: ${CONSUL_HOST:127.0.0.1}
+      discovery:
+        instanceId: "${spring.application.name}-${server.port}-${spring.cloud.client.ip-address}"
+        prefer-ip-address: true
+        health-check-critical-timeout: "1m"
+      port: 8500

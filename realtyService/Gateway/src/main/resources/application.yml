@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    consul:
+      config:
+        enabled: true
+      service-registry:
+        auto-registration:
+          enabled: true
+      discovery:
+        register: true
+        instance-id: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+        service-name: gateway-service
+        query-passing: true
+      host: ${CONSUL_HOST:localhost}
+      port: 8500
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: authenticationService
+          uri: lb://authenticationService
+          predicates:
+            - Path=/agent/**, /user/**, /help/**, /organisation/**
+        - id: documentService
+          uri: lb://documentService
+          predicates:
+            - Path=/file/**
+        - id: advertisementService
+          uri: lb://advertisementService
+          predicates:
+            - Path=/agency/**, /builder/**, /deal/**, /favourites/**, /realty/**, /residentialComplex/**
+        - id: chatService
+          uri: lb://chatService
+          predicates:
+            - Path=/chat/**, /room/**
+
+management:
+  endpoint:
+    web:
+      exposure:
+        include: '*'
+server:
+  port: 8085

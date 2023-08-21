@@ -1,0 +1,12 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <property name="uuid_function" value="uuid_generate_v4()" dbms="postgresql"/>
+
+    <changeSet id="005" author="daniil stepkin">
+        <modifyDataType tableName="chat_room" columnName="id" newDataType="varchar"/>
+        <modifyDataType tableName="chat_and_user" columnName="chat_id" newDataType="varchar"/>
+    </changeSet>
+</databaseChangeLog>

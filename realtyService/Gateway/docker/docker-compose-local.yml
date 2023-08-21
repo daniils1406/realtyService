@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  consul:
+    container_name: consul
+    image: consul:1.10.1
+    command: agent -dev -ui -node=server1 -bootstrap-expect=1 -client=0.0.0.0
+    ports:
+      - "8500:8500"
+    networks:
+      - spring-cloud-network
+
+#  gateway-service:
+#    container_name: gateway-service
+#    ports:
+#      - "8080:8080"
+#    environment:
+#      CONSUL_HOST: consul
+#    build:
+#      context: ../
+#      dockerfile: Dockerfile
+#    depends_on:
+#      - consul
+#    networks:
+#      - spring-cloud-network
+
+networks:
+  spring-cloud-network:
+    driver: bridge

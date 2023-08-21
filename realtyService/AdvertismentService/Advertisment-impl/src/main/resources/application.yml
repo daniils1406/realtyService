@@ -1,0 +1,47 @@
+spring:
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    timeout: 500
+    database: 0
+  rabbitmq:
+    host: ${RABBIT_HOST:localhost}
+    port: ${RABBIT_PORT:5672}
+    username: ${RABBIT_USERNAME:guest}
+    password: ${RABBIT_PASSWORD:guest}
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/AdvertismentService
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:Landrover2013}
+  liquibase:
+    change-log: classpath:db.changelog/changelog-master.xml
+  data:
+    rest:
+      default-page-size: 5
+#  application:
+#    name: advertisementService
+#  cloud:
+#    consul:
+#      config:
+#        enabled: false
+#      host: ${CONSUL_HOST:127.0.0.1}
+#      discovery:
+#        instanceId: "${spring.application.name}-${server.port}-${spring.cloud.client.ip-address}"
+#        prefer-ip-address: true
+#        health-check-critical-timeout: "1m"
+
+server:
+  port: 8082
+grpc:
+  server:
+    port: 8092
+
+
+service-rabbit:
+  exchangeNotification-name: exchangeNotification
+  queueNotification-name: queueNotification
+  routingNotification-key: keyNotification
+
+rsa:
+  public-key: "classpath:certs/public_key.pem"

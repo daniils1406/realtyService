@@ -1,0 +1,243 @@
+version: '3.8'
+
+services:
+
+
+
+  chat-service:
+    image: chat
+    depends_on:
+      - kafka
+      - Chat-db
+    links:
+      - kafka
+      - Chat-db
+    expose:
+      - 8084
+    ports:
+      - "8084:8084"
+    environment:
+      RABBIT_HOST: rabbitmq
+      RABBIT_PORT: 5672
+      RABBIT_USERNAME: guest
+      RABBIT_PASSWORD: guest
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+      DB_HOST: Chat-db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: Landrover2013
+      MINIO_HOST: minio
+      MINIO_PORT: 9000
+      CONSUL_HOST: consul
+    networks:
+      - spring-cloud-network
+
+  advertisment-service:
+    image: advertisment
+    depends_on:
+      - advertisement-db
+    links:
+      - advertisement-db
+    ports:
+      - "8082:8082"
+    environment:
+      RABBIT_HOST: rabbitmq
+      RABBIT_PORT: 5672
+      RABBIT_USERNAME: guest
+      RABBIT_PASSWORD: guest
+      DB_HOST: advertisement-db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: Landrover2013
+      CONSUL_HOST: consul
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    networks:
+      - spring-cloud-network
+
+  document-service:
+    image: document
+    depends_on:
+      - minio
+      - Document-db
+    links:
+      - minio
+      - Document-db
+    expose:
+      - 8081
+    ports:
+      - "8081:8081"
+    environment:
+      RABBIT_HOST: rabbitmq
+      RABBIT_PORT: 5672
+      RABBIT_USERNAME: guest
+      RABBIT_PASSWORD: guest
+      DB_HOST: Document-db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: Landrover2013
+      MINIO_HOST: minio
+      MINIO_PORT: 9000
+      CONSUL_HOST: consul
+    networks:
+      - spring-cloud-network
+
+  authentification-service:
+    image: authentifications
+    depends_on:
+      - redis
+      - rabbitmq
+      - Authentification-db
+    links:
+      - redis
+      - rabbitmq
+      - Authentification-db
+    expose:
+      - 8080
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: Authentification-db
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: Landrover2013
+      RABBIT_HOST: rabbitmq
+      RABBIT_PORT: 5672
+      RABBIT_USERNAME: guest
+      RABBIT_PASSWORD: guest
+      CONSUL_HOST: consul
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    networks:
+      - spring-cloud-network
+
+
+  Authentification-db:
+    image: postgres:12-alpine
+    restart: on-failure
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Landrover2013
+      POSTGRES_DB: AuthentificationService
+    networks:
+      - spring-cloud-network
+
+  Chat-db:
+    image: postgres:12-alpine
+    restart: on-failure
+    ports:
+      - "5436:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Landrover2013
+      POSTGRES_DB: ChatService
+    networks:
+      - spring-cloud-network
+
+  Document-db:
+    image: postgres:12-alpine
+    restart: on-failure
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Landrover2013
+      POSTGRES_DB: DocumentService
+    networks:
+      - spring-cloud-network
+
+  advertisement-db:
+    image: postgres:12-alpine
+    restart: on-failure
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Landrover2013
+      POSTGRES_DB: AdvertismentService
+    networks:
+      - spring-cloud-network
+
+
+
+  redis:
+    image: redis
+    restart: always
+    command: redis-server
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./storage/redis/data:/data
+    logging:
+      driver: none
+    networks:
+      - spring-cloud-network
+
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.2
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - spring-cloud-network
+
+  kafka:
+    image: confluentinc/cp-kafka:7.3.2
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      #      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    networks:
+      - spring-cloud-network
+
+  minio:
+    image: minio/minio
+    hostname: "minio"
+    ports:
+      - 9000:9000
+      - 9001:9001
+    environment:
+      MINIO_ACCESS_KEY: admin
+      MINIO_SECRET_KEY: 12345678
+    volumes:
+      - ./data:/data
+      - ./config:/root/.minio/
+    command: server --console-address ':9001' /data
+    privileged: true
+    restart: always
+    networks:
+      - spring-cloud-network
+
+  rabbitmq:
+    image: rabbitmq:3.9.5-management
+    restart: on-failure
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - spring-cloud-network
+
+  consul:
+    image: consul:1.1.0
+    hostname: localhost
+    ports:
+      - 8500:8500
+    networks:
+      - spring-cloud-network
+    network_mode: bridge
+

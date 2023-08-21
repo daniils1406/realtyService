@@ -1,0 +1,226 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <property name="uuid_function" value="uuid_generate_v4()" dbms="postgresql"/>
+
+    <changeSet id="001" author="daniil stepkin">
+
+<!--        <preConditions onFail="MARK_RAN">-->
+<!--                <tableExists schemaName="schema" tableName="agency"/>-->
+<!--                <tableExists schemaName="schema" tableName="realty"/>-->
+<!--                <tableExists schemaName="schema" tableName="residential_complex"/>-->
+<!--                <tableExists schemaName="schema" tableName="builder"/>-->
+<!--                <tableExists schemaName="schema" tableName="advert_tariff"/>-->
+<!--                <tableExists schemaName="schema" tableName="deal"/>-->
+<!--        </preConditions>-->
+
+<!--        <dropTable tableName="agency" cascadeConstraints="true"/>-->
+<!--        <dropTable tableName="realty" cascadeConstraints="true"/>-->
+<!--        <dropTable tableName="residential_complex" cascadeConstraints="true"/>-->
+<!--        <dropTable tableName="builder" cascadeConstraints="true"/>-->
+<!--        <dropTable tableName="advert_tariff" cascadeConstraints="true"/>-->
+<!--        <dropTable tableName="deal" cascadeConstraints="true"/>-->
+<!--        <dropTable tableName="favourites" cascadeConstraints="true"/>-->
+<!--        <dropTable tableName="flat" cascadeConstraints="true"/>-->
+<!--        <dropTable tableName="house" cascadeConstraints="true"/>-->
+
+        <sql>CREATE EXTENSION "uuid-ossp";</sql>
+        <sql> CREATE TYPE agentLevel AS ENUM ('STARTING','VERIFIED','EXPERIENCED','PRO')</sql>
+        <sql> CREATE TYPE realtyStatus AS ENUM ('OPEN','HIDDEN','DRAFT','DELETE')</sql>
+        <sql> CREATE TYPE realtyType AS ENUM ('NEW','SECONDARY')</sql>
+        <sql> CREATE TYPE advertType AS ENUM ('PERMANENT','MONTH','DAY','YEAR')</sql>
+        <sql> CREATE TYPE currency AS ENUM ('$','₽','€')</sql>
+        <sql> CREATE TYPE tariff AS ENUM ('WITH_NO_DOCUMENTS','STANDART','PREMIUM','TOP')</sql>
+        <sql> CREATE TYPE dealStatus AS ENUM ('COMPLETED','THWARTED','IN_PROCESS')</sql>
+        <sql> CREATE TYPE material AS ENUM ('BALK','BRICK','AEROCRETE')</sql>
+        <sql> CREATE TYPE status AS ENUM ('REGISTERED','VERIFIED','DELETE','HIDDEN')</sql>
+
+
+
+        <createTable tableName="advert_tariff" >
+            <column name="id" type="tariff"/>
+
+            <column name="description" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="price" type="int"/>
+
+        </createTable>
+
+        <createTable tableName="agency"> <!--Обратиться за изображением в отдельный севрис, у агнеств картинка только одна, их автар-->
+            <column name="id" type="uuid" defaultValueComputed="${uuid_function}">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_agency"/>
+            </column>
+            <column name="insert_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="name" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="VARCHAR"/>
+            <column name="link_for_website" type="VARCHAR"/>
+            <column name="regions" type="varchar"/>
+            <column name="status" type="agentLevel">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+
+
+        <createTable tableName="builder">
+            <column name="id" type="uuid" defaultValueComputed="${uuid_function}">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_builder"/>
+            </column>
+
+            <column name="name" type="VARCHAR"/>
+
+            <column name="description" type="varchar"/>
+
+            <column name="link_on_website" type="VARCHAR"/><!-- ВАЛИДАЦИЯ ХОТЯ БЫ ОДНО ИЗ ЭТИХ ПОЛЕЙ ДОЛЖНО БЫТЬ ЗАПОЛНЕНО-->
+
+            <column name="phone_number" type="VARCHAR"/><!-- ВАЛИДАЦИЯ ХОТЯ БЫ ОДНО ИЗ ЭТИХ ПОЛЕЙ ДОЛЖНО БЫТЬ ЗАПОЛНЕНО-->
+
+            <column name="status" type="status" defaultValue="REGISTERED"/> <!--('REGISTERED','VERIFIED','DELETE' -->
+
+            <column name="foundation_year" type="DATE"/>
+
+            <column name="insert_date" type="DATE"/>
+
+        </createTable>
+
+        <createTable tableName="residential_complex" >
+            <column name="id" type="uuid" defaultValueComputed="${uuid_function}">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_residential_complex"/>
+            </column>
+
+            <column name="region" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="city" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="district" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="number_of_buildings" type="int"/>
+
+            <column name="number_of_ready_buildings" type="int"/>
+
+            <column name="builder_id" type="uuid">
+                <constraints foreignKeyName="fk_toBuilder" unique="false" references="builder(id)"/>
+            </column>
+
+            <column name="name" type="varchar"/>
+
+            <column name="description" type="varchar"/>
+
+            <column name="link_on_website" type="varchar"/><!-- ВАЛИДАЦИЯ-->
+            <column name="phone_number" type="varchar"/><!-- ВАЛИДАЦИЯ-->
+            <column name="delivery_year" type="date"/><!-- ВАЛИДАЦИЯ-->
+            <column name="status" type="status"/>
+        </createTable>
+
+
+        <createTable tableName="realty">
+            <column name="id" type="uuid" defaultValueComputed="${uuid_function}">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_realty"/>
+            </column>
+            <column name="insert_date" type="TIMESTAMP WITHOUT TIME ZONE" defaultValueComputed="NOW()"/>
+            <column name="update_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="release_date" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="complex_id" type="uuid">
+                <constraints unique="true" foreignKeyName="fk_to_residential_complex" references="residential_complex(id)"/> <!-- прежде чем удалить жилой комлекс, скрой все обьявления недвижимости, которые на нее сссылаються-->
+            </column>
+            <column name="owner_id" type="uuid"/><!-- столбец является fk, но так как таблица на которую он сылается в другой бд, я не ссылаю его-->
+            <column name="square" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="region" type="VARCHAR"/><!-- Может быть пустым, определяется тем, указан ли жилой комплекс-->
+            <column name="district" type="VARCHAR"/><!-- Может быть пустым, определяется тем, указан ли жилой комплекс-->
+
+            <column name="address" type="VARCHAR"><!-- НУЖНА ВАЛИДАЦИЯ, МОЛ ЕСЛИ НЕ УКАЗАН ЖИЛОЙ КОМПЛЕКС, ТО НЕОБХОДИМО УКАЗАТЬ ЕЩЕ И РЕСПУБЛИКУ РАЙОН-->
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="tarif_id" type="tariff"/><!-- fk, не уникальный на тариф-->
+
+            <column name="description" type="text"/>
+
+            <column name="status" type="realtyStatus">
+                <constraints nullable="false"/>
+            </column>
+            <column name="realty_type" type="realtyType">
+                <constraints nullable="false"/>
+            </column>
+            <column name="advert_type" type="advertType">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cost" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currency" type="currency">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+
+
+        <createTable tableName="flat">
+            <column name="id" type="uuid">
+                <constraints foreignKeyName="fk_toRealty" unique="true" references="realty(id)"/>
+            </column>
+            <column name="number_of_rooms" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="level" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kitchen_square" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="living_square" type="float">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="house">
+            <column name="id" type="uuid">
+                <constraints foreignKeyName="fk_toRealty" unique="true" references="realty(id)"/>
+            </column>
+
+            <column name="area_square" type="float"/>
+            <column name="material" type="material"/>
+            <column name="levels" type="int"/>
+        </createTable>
+
+
+
+
+        <createTable tableName="deal">
+            <column name="id" type="uuid" defaultValueComputed="${uuid_function}">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_deal"/>
+            </column>
+            <column name="client_id" type="uuid"/><!-- FK но не определим, так как таблица из другой БД-->
+            <column name="broker_id" type="uuid"/><!-- FK но не определим, так как таблица из другой БД, это может быть и сам собственник-->
+            <column name="period_of_deal" type="DATE"/> <!-- А ЕСЛИ ПМЖ -->
+            <column name="realty_id" type="uuid">
+                <constraints foreignKeyName="fk_toRealty" references="realty(id)" unique="true"/>
+            </column>
+            <column name="transaction_amount" type="int"/>
+            <column name="status" type="dealStatus"/>
+        </createTable>
+
+        <createTable tableName="favourites">
+            <column name="client_id" type="uuid"/><!--fk но на таблицы, которых нет в этой бд -->
+            <column name="realty_id" type="uuid"/><!--fk но на таблицы, которых нет в этой бд -->
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

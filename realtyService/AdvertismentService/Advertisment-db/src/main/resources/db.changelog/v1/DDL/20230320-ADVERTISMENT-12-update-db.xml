@@ -1,0 +1,22 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <changeSet id="017" author="daniil stepkin">
+        <dropColumn tableName="realty" columnName="complex_id"/>
+        <addColumn tableName="realty">
+            <column name="complex_id" type="uuid">
+                <constraints unique="false" foreignKeyName="fk_to_residential_complex" references="residential_complex(id)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="018" author="daniil stepkin">
+        <dropColumn tableName="deal" columnName="realty_id"/>
+        <addColumn tableName="deal">
+            <column name="realty_id" type="uuid">
+                <constraints foreignKeyName="fk_toRealty" references="realty(id)" unique="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

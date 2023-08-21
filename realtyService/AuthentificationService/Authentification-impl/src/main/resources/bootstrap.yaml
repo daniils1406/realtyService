@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: authenticationService
+  cloud:
+    consul:
+      config:
+        enabled: true
+      host: ${CONSUL_HOST:127.0.0.1}
+      discovery:
+        instanceId: "${spring.application.name}-${server.port}-${spring.cloud.client.ip-address}"
+        prefer-ip-address: true
+        health-check-critical-timeout: "1m"
+      port: ${CONSUL_PORT:8500}
+
+server:
+  port: 8080
+grpc:
+  documentServiceName: documentService
+  server:
+    port: 8090

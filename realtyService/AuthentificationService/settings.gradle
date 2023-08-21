@@ -1,0 +1,5 @@
+rootProject.name = 'AuthentificationService'
+include 'Authentification-api'
+include 'Authentification-db'
+include 'Authentification-impl'
+

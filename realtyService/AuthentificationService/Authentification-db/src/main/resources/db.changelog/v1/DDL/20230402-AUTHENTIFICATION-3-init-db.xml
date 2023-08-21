@@ -1,0 +1,29 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <property name="uuid_function" value="uuid_generate_v4()" dbms="postgresql"/>
+
+
+    <changeSet id="003" author="daniil stepkin">
+        <createTable tableName="verification_token">
+            <column name="id" type="uuid">
+                <constraints unique="false" references="cian_user(id)" foreignKeyName="fk_toCianUser"/>
+            </column>
+            <column name="token" type="varchar"/>
+            <column name="expiryDate" type="date"/>
+            <column name="userId" type="uuid">
+                <constraints unique="false" foreignKeyName="fr_to_user" references="cian_user(id)"/>
+            </column>
+        </createTable>
+        <dropColumn tableName="agent" columnName="agencyId"/>
+        <addColumn tableName="agent">
+            <column name="agency_id" type="uuid"/>
+        </addColumn>
+        <dropColumn tableName="organisation" columnName="organisationId"/>
+        <addColumn tableName="organisation">
+            <column name="organisation_id" type="uuid"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

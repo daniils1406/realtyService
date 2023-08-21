@@ -1,0 +1,5 @@
+rootProject.name = 'ChatService'
+include 'Chat-api'
+include 'Chat-db'
+include 'Chat-impl'
+

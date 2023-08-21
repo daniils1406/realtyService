@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="DDL/20230306-ADVERTISMENT-1-init-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230306-ADVERTISMENT-2-update-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230313-ADVERTISMENT-3-init-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230313-ADVERTISMENT-4-update-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230315-ADVERTISMENT-5-update-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230315-ADVERTISMENT-6-update-db.xml" relativeToChangelogFile="true"/>
+    <include file="DML/20230316-ADVERTISMENT-7-insert-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230318-ADVERTISMENT-8-update-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230319-ADVERTISMENT-9-update-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230319-ADVERTISMENT-10-update-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230320-ADVERTISMENT-11-update-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230320-ADVERTISMENT-12-update-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230601-ADVERTISMENT-13-update-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230601-ADVERTISMENT-14-update-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230601-ADVERTISMENT-15-update-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230601-ADVERTISMENT-16-update-db.xml" relativeToChangelogFile="true"/>
+</databaseChangeLog>

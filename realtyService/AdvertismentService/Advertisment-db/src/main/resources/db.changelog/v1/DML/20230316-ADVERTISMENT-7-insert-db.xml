@@ -1,0 +1,531 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <changeSet id="011" author="daniil stepkin">
+
+
+        <insert tableName="regions">
+            <column name="code" type="int" value="01"/>
+            <column name="region_name" type="varchar" value="Республика Адыгея"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="02"/>
+            <column name="region_name" type="varchar" value="Республика Башкортостан"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="03"/>
+            <column name="region_name" type="varchar" value="Республика Бурятия"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="04"/>
+            <column name="region_name" type="varchar" value="Республика Алтай (Горный Алтай)"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="05"/>
+            <column name="region_name" type="varchar" value="Республика Дагестан"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="06"/>
+            <column name="region_name" type="varchar" value="Республика Ингушетия"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="07"/>
+            <column name="region_name" type="varchar" value="Кабардино-Балкарская Республика"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="08"/>
+            <column name="region_name" type="varchar" value="Республика Калмыкия"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="09"/>
+            <column name="region_name" type="varchar" value="Республика Карачаево-Черкессия"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="10"/>
+            <column name="region_name" type="varchar" value="Республика Карелия"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="11"/>
+            <column name="region_name" type="varchar" value="Республика Коми"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="12"/>
+            <column name="region_name" type="varchar" value="Республика Марий Эл"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="13"/>
+            <column name="region_name" type="varchar" value="Республика Мордовия"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="14"/>
+            <column name="region_name" type="varchar" value="Республика Саха (Якутия)"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="15"/>
+            <column name="region_name" type="varchar" value="Республика Северная Осетия — Алания"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="16"/>
+            <column name="region_name" type="varchar" value="Республика Татарстан"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="17"/>
+            <column name="region_name" type="varchar" value="Республика Тыва"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="18"/>
+            <column name="region_name" type="varchar" value="Удмуртская Республика"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="19"/>
+            <column name="region_name" type="varchar" value="Республика Хакасия"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="21"/>
+            <column name="region_name" type="varchar" value="Чувашская Республика"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="22"/>
+            <column name="region_name" type="varchar" value="Алтайский край"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="23"/>
+            <column name="region_name" type="varchar" value="Краснодарский край"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="24"/>
+            <column name="region_name" type="varchar" value="Красноярский край"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="25"/>
+            <column name="region_name" type="varchar" value="Приморский край"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="26"/>
+            <column name="region_name" type="varchar" value="Ставропольский край"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="27"/>
+            <column name="region_name" type="varchar" value="Хабаровский край"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="28"/>
+            <column name="region_name" type="varchar" value="Амурская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="29"/>
+            <column name="region_name" type="varchar" value="Архангельская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="30"/>
+            <column name="region_name" type="varchar" value="Астраханская область"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="31"/>
+            <column name="region_name" type="varchar" value="Белгородская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="32"/>
+            <column name="region_name" type="varchar" value="Брянская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="33"/>
+            <column name="region_name" type="varchar" value="Владимирская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="34"/>
+            <column name="region_name" type="varchar" value="Волгоградская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="35"/>
+            <column name="region_name" type="varchar" value="Вологодская область"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="36"/>
+            <column name="region_name" type="varchar" value="Воронежская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="37"/>
+            <column name="region_name" type="varchar" value="Ивановская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="38"/>
+            <column name="region_name" type="varchar" value="Иркутская область"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="39"/>
+            <column name="region_name" type="varchar" value="Калининградская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="40"/>
+            <column name="region_name" type="varchar" value="Калужская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="41"/>
+            <column name="region_name" type="varchar" value="Камчатский край"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="42"/>
+            <column name="region_name" type="varchar" value="Кемеровская область"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="43"/>
+            <column name="region_name" type="varchar" value="Кировская область"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="44"/>
+            <column name="region_name" type="varchar" value="Костромская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="45"/>
+            <column name="region_name" type="varchar" value="Курганская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="46"/>
+            <column name="region_name" type="varchar" value="Курская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="47"/>
+            <column name="region_name" type="varchar" value="Ленинградская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="48"/>
+            <column name="region_name" type="varchar" value="Липецкая область"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="49"/>
+            <column name="region_name" type="varchar" value="Магаданская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="50"/>
+            <column name="region_name" type="varchar" value="Московская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="51"/>
+            <column name="region_name" type="varchar" value="Мурманская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="52"/>
+            <column name="region_name" type="varchar" value="Нижегородская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="53"/>
+            <column name="region_name" type="varchar" value="Новгородская область"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="54"/>
+            <column name="region_name" type="varchar" value="Новосибирская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="55"/>
+            <column name="region_name" type="varchar" value="Омская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="56"/>
+            <column name="region_name" type="varchar" value="Оренбургская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="57"/>
+            <column name="region_name" type="varchar" value="Орловская область"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="58"/>
+            <column name="region_name" type="varchar" value="Пензенская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="59"/>
+            <column name="region_name" type="varchar" value="Пермский край"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="60"/>
+            <column name="region_name" type="varchar" value="Псковская область"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="61"/>
+            <column name="region_name" type="varchar" value="Ростовская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="62"/>
+            <column name="region_name" type="varchar" value="Рязанская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="63"/>
+            <column name="region_name" type="varchar" value="Самарская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="64"/>
+            <column name="region_name" type="varchar" value="Саратовская область"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="65"/>
+            <column name="region_name" type="varchar" value="Сахалинская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="66"/>
+            <column name="region_name" type="varchar" value="Свердловская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="67"/>
+            <column name="region_name" type="varchar" value="Смоленская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="68"/>
+            <column name="region_name" type="varchar" value="Тамбовская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="69"/>
+            <column name="region_name" type="varchar" value="Тверская область"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="70"/>
+            <column name="region_name" type="varchar" value="Томская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="71"/>
+            <column name="region_name" type="varchar" value="Тульская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="72"/>
+            <column name="region_name" type="varchar" value="Тюменская область"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="73"/>
+            <column name="region_name" type="varchar" value="Ульяновская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="74"/>
+            <column name="region_name" type="varchar" value="Челябинская область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="75"/>
+            <column name="region_name" type="varchar" value="Забайкальский край"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="76"/>
+            <column name="region_name" type="varchar" value="Ярославская область"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="77"/>
+            <column name="region_name" type="varchar" value="Москва"/>
+            <column name="sales_price" type="int" value="10"/>
+            <column name="rent_price" type="int" value="10"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="78"/>
+            <column name="region_name" type="varchar" value="Санкт-Петербург"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="79"/>
+            <column name="region_name" type="varchar" value="Еврейская автономная область"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="82"/>
+            <column name="region_name" type="varchar" value="Республика Крым"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="83"/>
+            <column name="region_name" type="varchar" value="Ненецкий автономный округ"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="86"/>
+            <column name="region_name" type="varchar" value="Ханты-Мансийский автономный округ — Югра"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="87"/>
+            <column name="region_name" type="varchar" value="Чукотский автономный округ"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="89"/>
+            <column name="region_name" type="varchar" value="Ямало-Ненецкий автономный округ"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="92"/>
+            <column name="region_name" type="varchar" value="г. Севастополь"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="94"/>
+            <column name="region_name" type="varchar" value="Территории, находящиеся за пределами РФ и обслуживаемые Департаментом режимных объектов МВД России"/>
+            <column name="sales_price" type="int" value="5"/>
+            <column name="rent_price" type="int" value="5"/>
+        </insert>
+        <insert tableName="regions">
+            <column name="code" type="int" value="95"/>
+            <column name="region_name" type="varchar" value="Чеченская республика"/>
+            <column name="sales_price" type="int" value="2"/>
+            <column name="rent_price" type="int" value="2"/>
+        </insert>
+
+    </changeSet>
+
+
+
+
+</databaseChangeLog>

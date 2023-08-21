@@ -1,0 +1,16 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <property name="uuid_function" value="uuid_generate_v4()" dbms="postgresql"/>
+
+    <changeSet id="002" author="daniil stepkin">
+        <dropAllForeignKeyConstraints tableName="builder" baseTableName="residential_complex"/>
+        <addForeignKeyConstraint baseTableName="residential_complex" baseColumnNames="builder_id"
+                                 constraintName="fk_toBuilder" referencedTableName="builder" referencedColumnNames="id" referencesUniqueColumn="false"/>
+        <sql>DROP TYPE tariff cascade </sql>
+        <sql>CREATE TYPE tariff AS ENUM ('WITH_NO_DOCUMENTS','STANDART','PREMIUM','TOP','BUILDER')</sql>
+    </changeSet>
+
+</databaseChangeLog>

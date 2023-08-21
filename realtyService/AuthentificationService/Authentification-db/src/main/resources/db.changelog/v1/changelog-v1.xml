@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="DDL/20230328-AUTHENTIFICATION-1-init-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230331-AUTHENTIFICATION-2-init-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230402-AUTHENTIFICATION-3-init-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230402-AUTHENTIFICATION-4-init-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230402-AUTHENTIFICATION-5-update-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230403-AUTHENTIFICATION-6-init-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230404-AUTHENTIFICATION-7-update-db.xml" relativeToChangelogFile="true"/>
+    <include file="DDL/20230418-AUTHENTIFICATION-8-update-db.xml" relativeToChangelogFile="true"/>
+</databaseChangeLog>

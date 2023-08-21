@@ -1,0 +1,49 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <property name="uuid_function" value="uuid_generate_v4()" dbms="postgresql"/>
+
+    <changeSet id="001" author="daniil stepkin">
+        <sql>CREATE EXTENSION "uuid-ossp";</sql>
+        <sql>CREATE TYPE cause AS ENUM('INTERESTED','BANNED','DELETED','OPENED','SERVICE')</sql>
+        <sql>CREATE TYPE status AS ENUM('DELIVERED','SENDING','FAILED','READIED')</sql>
+        <createTable tableName="chat_room">
+            <column name="id" type="uuid" defaultValueComputed="${uuid_function}">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_chat"/>
+            </column>
+            <column name="create_date" type="DATE"/>
+            <column name="name" type="varchar"/>
+        </createTable>
+
+        <createTable tableName="message">
+            <column name="id" type="uuid" defaultValueComputed="${uuid_function}">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="sender_id" type="uuid"/>
+            <column name="recipient_id" type="uuid"/>
+            <column name="sender_name" type="varchar"/>
+            <column name="content" type="varchar"/>
+            <column name="create_date" type="DATE"/>
+            <column name="status" type="status"/>
+        </createTable>
+
+        <createTable tableName="chat_and_user">
+            <column name="user_id" type="uuid">
+            </column>
+            <column name="chat_id" type="uuid">
+            </column>
+        </createTable>
+
+        <createTable tableName="notification">
+            <column name="id" type="uuid" defaultValueComputed="${uuid_function}">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_message"/>
+            </column>
+            <column name="cause_of_message" type="cause"/>
+            <column name="content" type="varchar"/>
+            <column name="create_date" type="DATE"/>
+            <column name="recipient_id" type="uuid"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

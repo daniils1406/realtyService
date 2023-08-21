@@ -1,0 +1,27 @@
+syntax="proto3";
+
+package chatPackage;
+option java_multiple_files = true;
+option java_outer_classname = "Chat";
+option java_package = "chat";
+
+message NotificationRoom{
+  string id=1;
+  string userLogin=2;
+}
+
+message Empty{
+
+}
+
+message NotificationRequest{
+  string causeOfMessage=1;
+  string content=2;
+  string recipientId=3;
+}
+
+service ChatService{
+  rpc createNotificationRoom(NotificationRoom) returns(Empty);
+
+  rpc sendNotification(NotificationRequest) returns (Empty);
+}

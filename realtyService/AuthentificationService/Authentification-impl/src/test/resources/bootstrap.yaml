@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: authenticationService
+  cloud:
+    bus:
+      enabled: false
+    discovery:
+      enabled: false
+    consul:
+      enabled: false
+      config:
+        enabled: false
+
+server:
+  port: 8080
+grpc:
+  documentServiceName: documentService
+  server:
+    port: 8090

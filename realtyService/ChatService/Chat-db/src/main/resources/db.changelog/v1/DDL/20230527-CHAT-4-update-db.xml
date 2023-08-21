@@ -1,0 +1,15 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+
+    <property name="uuid_function" value="uuid_generate_v4()" dbms="postgresql"/>
+
+    <changeSet id="004" author="daniil stepkin">
+        <dropColumn tableName="chat_room" columnName="isExist"></dropColumn>
+        <sql>CREATE TYPE chat_status AS ENUM('DELETED','CHAT','NOTIFICATION')</sql>
+        <addColumn tableName="chat_room">
+            <column name="status" type="chat_status"></column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

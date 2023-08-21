@@ -1,0 +1,5 @@
+rootProject.name = 'AdvertismentService'
+include 'Advertisment-api'
+include 'Advertisment-db'
+include 'Advertisment-impl'
+

@@ -1,0 +1,58 @@
+spring:
+  rabbitmq:
+    host: ${RABBIT_HOST:localhost}
+    port: ${RABBIT_PORT:5672}
+    username: ${RABBIT_USERNAME:guest}
+    password: ${RABBIT_PASSWORD:guest}
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/DocumentService
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:Landrover2013}
+  liquibase:
+    change-log: classpath:db.documentchangelog/changelog-master.xml
+
+#  application:
+#    name: documentService
+#  cloud:
+#    consul:
+#      config:
+#        enabled: false
+#      host: ${CONSUL_HOST:127.0.0.1}
+#      discovery:
+#        instanceId: "${spring.application.name}-${server.port}-${spring.cloud.client.ip-address}"
+#        prefer-ip-address: true
+#        health-check-critical-timeout: "1m"
+
+
+
+service-rabbit:
+  exchangeNotification-name: exchangeNotification
+  queueNotification-name: queueNotification
+  routingNotification-key: keyNotification
+
+
+minio:
+  endpoint: http://${MINIO_HOST:localhost}:${MINIO_PORT:9000}
+  accessKeyId: ShYeBAZWlbyUefy8
+  accessKeySecret: CbvRAEmPxYKc6qWjEzSjpI2otZcMHlBA
+  bucketName: files
+
+imageExtension: png, jpg, jpeg
+necessary-files:
+  builder-or-agency: REGULATION, OGRN, EGRUL
+  agent: ORGNIP, INN, EGRIP, PERSON
+  owner: INN, PERSON
+  user: INN, PERSON
+  flat: EGRN
+  house: EGRN
+
+server:
+  port: 8081
+grpc:
+  server:
+    port: 8091
+
+
+rsa:
+  public-key: "classpath:certs/public_key.pem"

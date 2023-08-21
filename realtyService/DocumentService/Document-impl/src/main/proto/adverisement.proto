@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package advertisementPackage;
+option java_multiple_files = true;
+option java_outer_classname = "Advertisement";
+option java_package = "advertisement";
+
+
+message IdRequest{
+  string id=1;
+}
+
+enum Organisation{
+  AGENCY=0;
+  BUILDER=1;
+}
+
+message OrganisationRequest{
+  string id=1;
+  Organisation organisation=2;
+}
+
+message Empty{
+
+}
+
+message OwnerId{
+  string id=1;
+}
+
+message OrganisationExist{
+  bool exist=1;
+}
+
+service AdvertisementService{
+  rpc bannedAllRealtyOfUser(IdRequest) returns (Empty);
+
+  rpc verifyAllRealtyOfUser(IdRequest) returns (Empty);
+
+  rpc verifySomeRealtyOfUser(IdRequest) returns (Empty);
+
+  rpc deleteAllRealtyOfUser(IdRequest) returns (Empty);
+
+  rpc findOwnerOfRealty(IdRequest) returns (OwnerId);
+
+  rpc checkOrganisationExist(OrganisationRequest) returns(OrganisationExist);
+}
